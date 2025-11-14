@@ -1,0 +1,137 @@
+:root {
+  color-scheme: dark;
+  --font-family: 'Segoe UI', sans-serif;
+  --text-primary: #f5f5f5;
+  --text-secondary: #c8c8d6;
+  --overlay-background: rgba(16, 18, 32, 0.82);
+  --overlay-radius: 24px;
+  --overlay-gap: 32px;
+  --overlay-padding: 32px;
+  --overlay-shadow: none;
+  --overlay-backdrop-filter: none;
+  --artwork-border-radius: 16px;
+  --transition-duration: 0.6s;
+  --overlay-transition-animation: overlay-fade var(--transition-duration) ease-in-out;
+  --layout-safe-inset: 24px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  color: var(--text-primary);
+  font-family: var(--font-family);
+  background: transparent;
+  min-height: 100vh;
+}
+
+.app {
+  width: 100%;
+  padding: var(--layout-safe-inset);
+  box-sizing: border-box;
+}
+
+.overlay {
+  display: grid;
+  grid-template-columns: minmax(0, 300px) minmax(0, 1fr);
+  gap: var(--overlay-gap);
+  background: var(--overlay-background);
+  border-radius: var(--overlay-radius);
+  padding: var(--overlay-padding);
+  backdrop-filter: var(--overlay-backdrop-filter);
+  box-shadow: var(--overlay-shadow);
+  overflow: hidden;
+  transition: background var(--transition-duration) ease, box-shadow var(--transition-duration) ease;
+  max-width: 1100px;
+}
+
+.overlay.transitioning {
+  animation: var(--overlay-transition-animation, overlay-fade var(--transition-duration) ease-in-out);
+}
+
+.artwork {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: var(--artwork-border-radius);
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.artwork img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.text-block {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+h1 {
+  font-size: 5rem;
+  font-weight: 700;
+  margin: 0;
+  color: var(--text-primary);
+}
+
+p {
+  margin: 0;
+  font-size: 3rem;
+  color: var(--text-secondary);
+}
+
+.scrollable {
+  position: relative;
+  overflow: hidden;
+}
+
+.scrollable span {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.scrollable.scroll-active span {
+  will-change: transform;
+}
+
+.hidden {
+  display: none !important;
+}
+
+@media (max-width: 900px) {
+  .overlay {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .artwork {
+    max-width: 260px;
+    margin: 0 auto;
+  }
+}
+
+@keyframes overlay-fade {
+  from {
+    opacity: 0.15;
+    transform: translateY(12px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}

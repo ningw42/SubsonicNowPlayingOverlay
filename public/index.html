@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Subsonic Now Playing Overlay</title>
+    <link rel="stylesheet" href="/static/styles/base.css" />
+    <link id="theme-style" rel="stylesheet" href="/static/themes/vanilla.css" />
+  </head>
+  <body data-theme="vanilla">
+    <div id="app" class="app">
+      <div class="overlay">
+        <div class="artwork">
+          <img id="cover" alt="Album artwork" />
+        </div>
+        <div class="info">
+          <div class="text-block">
+            <h1 id="title" class="scrollable"></h1>
+            <p id="artist" class="scrollable"></p>
+            <p id="album" class="scrollable"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="/static/app.js" type="module"></script>
+  </body>
+</html>

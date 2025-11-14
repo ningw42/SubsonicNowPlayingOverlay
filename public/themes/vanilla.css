@@ -1,0 +1,25 @@
+body[data-theme='vanilla'] {
+  --font-family: 'Segoe UI', sans-serif;
+  --text-primary: #f5f5f5;
+  --text-secondary: #c8c8d6;
+  --overlay-background: rgba(12, 14, 24, 0.88);
+  --overlay-shadow: none;
+  --overlay-backdrop-filter: none;
+  --transition-duration: 0.6s;
+  --overlay-transition-animation: vanilla-overlay-fade var(--transition-duration) ease-in-out;
+}
+
+body[data-theme='vanilla'] h1 {
+  letter-spacing: 0.01em;
+}
+
+@keyframes vanilla-overlay-fade {
+  from {
+    opacity: 0.2;
+    transform: translateY(10px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}

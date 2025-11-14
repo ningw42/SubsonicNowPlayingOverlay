@@ -1,0 +1,24 @@
+{
+  "clientName": "SubsonicNowPlayingOverlay",
+  "apiVersion": "1.16.1",
+  "refreshIntervalMs": 5000,
+  "defaultTheme": "vanilla",
+  "listen": {
+    "host": "0.0.0.0",
+    "port": 3000
+  },
+  "users": [
+    {
+      "slug": "demo",
+      "serverUrl": "https://demo.subsonic.org",
+      "username": "demo",
+      "password": "demo",
+      "useTokenAuth": false,
+      "refreshIntervalMs": 2000,
+      "theme": "fancy",
+      "themeOptions": {
+        "shadowStyle": "macos"
+      }
+    }
+  ]
+}
