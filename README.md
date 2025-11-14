@@ -2,6 +2,10 @@
 
 Everything except this disclaimer is authored by GPT5-Codex in GitHub Copilot. Expect AI-ish code style and documentation.
 
+# Showcase
+
+![showcase](images/showcase.png)
+
 # Subsonic Now Playing Overlay
 
 A lightweight Node.js + TypeScript web application that renders a browser overlay for the current playback status of multiple Subsonic/OpenSubsonic users. Each user is configured statically via JSON and receives their own shareable overlay URL.
