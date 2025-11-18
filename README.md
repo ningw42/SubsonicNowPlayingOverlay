@@ -57,6 +57,14 @@ Duplicate `config/users.json` or create `config/users.local.json` (and point `CO
 
 > **Security tip:** Prefer `useTokenAuth: true` so requests use salted token authentication. Stored secrets should not be committed.
 
+Secrets can also be supplied from external files instead of being embedded directly in the JSON:
+
+- `passwordFile` – path to a file that contains the user's plain-text password (trailing newlines are stripped). Useful when pairing with `useTokenAuth: true`.
+- `tokenFile` – path to a file containing a pre-generated Subsonic token.
+- `saltFile` – optional path for the token's companion salt. When omitted, specify `salt` inline.
+
+Relative paths are resolved from the configuration file's directory.
+
 ### 3. Run in development mode
 
 ```powershell

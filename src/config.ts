@@ -5,6 +5,7 @@ import { AppConfig, ListenConfig, ThemeOptions, ThemeShadowStyle, UserConfig } f
 const CONFIG_PATH = process.env.CONFIG_PATH
   ? path.resolve(process.cwd(), process.env.CONFIG_PATH)
   : path.resolve(process.cwd(), 'config', 'users.json');
+const CONFIG_DIR = path.dirname(CONFIG_PATH);
 
 const DEFAULT_THEME = 'vanilla';
 const THEME_NAME_PATTERN = /^[a-z0-9-]+$/i;
@@ -31,6 +32,46 @@ function readConfigFile(): AppConfig {
 }
 
 const config: AppConfig = readConfigFile();
+
+function resolveSecretPath(inputPath: string): string {
+  return path.isAbsolute(inputPath) ? inputPath : path.resolve(CONFIG_DIR, inputPath);
+}
+
+function readSecretFile(relativePath: string, description: string): string {
+  const fullPath = resolveSecretPath(relativePath);
+  if (!fs.existsSync(fullPath)) {
+    throw new Error(`Secret file for ${description} not found: ${fullPath}`);
+  }
+
+  const raw = fs.readFileSync(fullPath, 'utf-8');
+  const value = raw.trimEnd();
+
+  if (!value) {
+    throw new Error(`Secret file for ${description} is empty: ${fullPath}`);
+  }
+
+  return value;
+}
+
+function applyUserSecretFiles(user: UserConfig): UserConfig {
+  const resolved: UserConfig = { ...user };
+
+  if (user.passwordFile) {
+    resolved.password = readSecretFile(user.passwordFile, `password for ${user.slug}`);
+  }
+
+  if (user.tokenFile) {
+    resolved.token = readSecretFile(user.tokenFile, `token for ${user.slug}`);
+  }
+
+  if (user.saltFile) {
+    resolved.salt = readSecretFile(user.saltFile, `salt for ${user.slug}`);
+  }
+
+  return resolved;
+}
+
+config.users = config.users.map(applyUserSecretFiles);
 
 export function getConfig(): AppConfig {
   return config;

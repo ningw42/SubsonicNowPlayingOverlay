@@ -3,8 +3,11 @@ export interface UserConfig {
   serverUrl: string;
   username: string;
   password?: string;
+  passwordFile?: string;
   token?: string;
+  tokenFile?: string;
   salt?: string;
+  saltFile?: string;
   useTokenAuth?: boolean;
   refreshIntervalMs?: number;
   theme?: string;
